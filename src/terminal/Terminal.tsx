@@ -7,12 +7,10 @@ import { Chips, Delta, Panel, fmt } from "./components/ui";
 import { ActivityPanel, BalancePanel, MetricsPanel, PositionsPanel, TradesTable } from "./components/panels";
 
 const TFS = ["1m", "5m", "15m", "1h", "4h", "1D"] as const;
-const NAV = ["Terminal", "Positions", "History", "Signals"] as const;
 
 export function Terminal() {
   const [theme, setTheme] = useTheme();
   const [tf, setTf] = useState<Timeframe>("1h");
-  const [nav, setNav] = useState<(typeof NAV)[number]>("Terminal");
   const [vol, setVol] = useState(true);
   const d = useMemo(() => getTerminalData(tf), [tf]);
 
@@ -23,11 +21,6 @@ export function Terminal() {
           <div className="flex shrink-0 items-center gap-2 text-[15px] font-semibold">
             <span className="text-highlight">✳</span>{d.status.name}
           </div>
-          <nav className="hidden gap-5 md:flex">
-            {NAV.map((n) => (
-              <button key={n} onClick={() => setNav(n)} className={n === nav ? "text-foreground" : "text-dim hover:text-foreground"}>{n}</button>
-            ))}
-          </nav>
         </div>
         <div className="flex items-center gap-3">
           {d.isPreview && <span className="chip text-highlight">PREVIEW DATA</span>}
