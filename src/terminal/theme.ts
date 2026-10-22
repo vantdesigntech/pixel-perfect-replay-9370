@@ -10,7 +10,7 @@ export function useTheme() {
     if (saved === "mono" || saved === "neon") setTheme(saved);
   }, []);
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
+    document.documentElement.dataset["theme"] = theme;
     localStorage.setItem(KEY, theme);
   }, [theme]);
   return [theme, setTheme] as const;

@@ -40,7 +40,7 @@ export function mockCandles(tf: Timeframe, count = 120): Candle[] {
 
 export function mockTerminalData(tf: Timeframe): TerminalData {
   const candles = mockCandles(tf);
-  const last = candles[candles.length - 1].close;
+  const last = candles[candles.length - 1]?.close ?? 0;
   const r = rng(42);
   const equity = Array.from({ length: 60 }, (_, i) => ({
     time: BASE_TIME - (60 - i) * 86400,
